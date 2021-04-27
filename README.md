@@ -22,7 +22,7 @@ node:14.15.3-alpine
 
 ```
 $ git clone git@github.com:ssk9597/Docker-Laravel-Nuxt-Nginx-MySQL.git
-$ cd Docker-php-node-nginx-mysql
+$ cd Docker-Laravel-Nuxt-Nginx-MySQL
 $ make nuxt
 $ make backend
 (任意)
