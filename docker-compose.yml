@@ -1,0 +1,53 @@
+version: '3.8'
+
+volumes:
+  db-data:
+
+services:
+  # php(api)
+  app:
+    build:
+      context: ./docker/php
+    volumes:
+      - $BACKEND_DIR:/laravel
+
+  # nginx
+  web:
+    build:
+      context: ./docker/nginx
+    ports:
+      - $NGINX_PORT:80
+    volumes:
+      - $BACKEND_DIR:/laravel
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: $NGINX_DIR
+
+  # MySQL
+  db:
+    build:
+      context: ./docker/mysql
+      args:
+        MYSQL_DATABASE: $MYSQL_DATABASE
+        MYSQL_USER: $MYSQL_USER
+        MYSQL_PASSWORD: $MYSQL_PASSWORD
+        MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+        TZ: $TZ
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - $DB_PORT:3306
+
+  # node,nuxt(front)
+  front:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    command: yarn dev
+    volumes:
+      - ./frontend:/app
+      - ./app/node_modules
+    ports:
+      - '$FRONT_PORT:3000'
+      - '$STORYBOOK_PORT:6006'
+    init: true
+    restart: on-failure
