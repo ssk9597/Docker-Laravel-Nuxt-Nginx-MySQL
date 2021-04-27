@@ -21,7 +21,7 @@ node:14.15.3-alpine
 ## Usage
 
 ```
-$ git clone git@github.com:ssk9597/Docker-php-node-nginx-mysql.git
+$ git clone git@github.com:ssk9597/Docker-Laravel-Nuxt-Nginx-MySQL.git
 $ cd Docker-php-node-nginx-mysql
 $ make nuxt
 $ make backend
