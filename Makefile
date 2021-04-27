@@ -12,6 +12,7 @@ restart:
 # nuxtの導入
 nuxt:
 	npx create-nuxt-app frontend
+	cp .env.example .env
 	docker-compose up -d --build
 
 # backend
