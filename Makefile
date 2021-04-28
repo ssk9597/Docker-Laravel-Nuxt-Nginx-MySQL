@@ -9,11 +9,13 @@ restart:
 	docker-compose down
 	docker-compose up -d --build
 
-# nuxtの導入
+# nuxtの導入(ファイルの追記あり)
 nuxt:
 	npx create-nuxt-app frontend
 	cp .env.example .env
 	docker-compose up -d --build
+	docker-compose exec front npm install --save @nuxtjs/proxy @nuxtjs/dotenv
+	docker-compose exec front touch .env
 
 # backend
 backend:
