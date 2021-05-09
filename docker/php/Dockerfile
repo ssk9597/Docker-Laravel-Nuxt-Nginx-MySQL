@@ -17,5 +17,8 @@ RUN apt-get update && \
 # phpの設定ファイル
 COPY ./php.ini /usr/local/etc/php/php.ini
 
+# メモリ不足で落ちないように
+COPY php.ini /usr/local/etc/php/ 
+
 # ディレクトリ
 WORKDIR /laravel
