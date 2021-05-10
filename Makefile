@@ -16,6 +16,7 @@ nuxt:
 	docker-compose up -d --build
 	docker-compose exec front npm install --save @nuxtjs/proxy @nuxtjs/dotenv
 	docker-compose exec front touch .env
+	docker-compose exec front npm install sass-loader@10.1.1 node-sass --save-dev
 
 # backend
 backend:
@@ -31,13 +32,12 @@ typescript:
 
 # composition-apiの導入(ファイルの追記あり)
 composition-api:
-	docker-compose exec front npm install --save @vue/composition-api
+	docker-compose exec front npm install @nuxtjs/composition-api --save
 
 # storybookの起動
 storybook:
 	docker-compose exec front npx sb init
 	docker-compose exec front npm run storybook
-	docker-compose exec front npm install sass-loader@10.1.1 node-sass --save-dev
 
 # storybookの再起動
 re-storybook:
